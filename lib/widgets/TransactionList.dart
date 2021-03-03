@@ -27,7 +27,7 @@ class TransactionList extends StatelessWidget {
                     ),
                     decoration: BoxDecoration(
                       border: Border.all(
-                        color: Colors.purple[400],
+                        color: Theme.of(context).primaryColor,
                         width: 2.5,
                       ),
                       borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -35,9 +35,9 @@ class TransactionList extends StatelessWidget {
                     padding: EdgeInsets.all(5),
                     child: Text('R\$${transaction.value.toStringAsFixed(2)}',
                         style: TextStyle(
+                          color: Theme.of(context).primaryColor,
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
-                          color: Colors.purple[200],
                         )),
                   ),
                   Column(

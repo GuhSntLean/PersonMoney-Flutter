@@ -23,36 +23,39 @@ class _TransactionFormState extends State<TransactionForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            TextField(
-              controller: titleController,
-              onSubmitted: (_) => _submitForm(),
-              decoration: InputDecoration(
-                labelText: 'Titulo',
+    return SingleChildScrollView(
+        child: Card(
+        elevation: 5,
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            children: [
+              TextField(
+                controller: titleController,
+                onSubmitted: (_) => _submitForm(),
+                decoration: InputDecoration(
+                  labelText: 'Titulo',
+                ),
               ),
-            ),
-            TextField(
-              controller: valueController,
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
-              onSubmitted: (_) => _submitForm(),
-              decoration: InputDecoration(
-                labelText: 'Valor (R\$)',
+              TextField(
+                controller: valueController,
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                onSubmitted: (_) => _submitForm(),
+                decoration: InputDecoration(
+                  labelText: 'Valor (R\$)',
+                ),
               ),
-            ),
-            Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-              // ignore: deprecated_member_use
-              FlatButton(
-                onPressed: _submitForm,
-                textColor: Colors.purple,
-                child: Text('Nova transação'),
-              )
-            ])
-          ],
+              Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                // ignore: deprecated_member_use
+                FlatButton(
+                  onPressed: _submitForm,
+                  textColor: Colors.purple,
+                  color: Colors.purple[100],
+                  child: Text('Nova transação'),
+                )
+              ])
+            ],
+          ),
         ),
       ),
     );

@@ -12,7 +12,13 @@ void main() => runApp(PesonMoney());
 class PesonMoney extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: _MyHomePage());
+    return MaterialApp(
+      debugShowCheckedModeBanner: false, 
+      home: _MyHomePage(),
+      theme: ThemeData(
+        primarySwatch: Colors.purple,
+      ),  
+    );
   }
 }
 
@@ -47,6 +53,8 @@ class __MyHomePageState extends State<_MyHomePage> {
     setState(() {
       _transaction.add(newTransaction);
     });
+
+    Navigator.of(context).pop();
   }
 
   _openTransactionFormModal(BuildContext context) {
