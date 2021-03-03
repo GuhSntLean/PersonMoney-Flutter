@@ -27,7 +27,7 @@ class _TransactionFormState extends State<TransactionForm> {
         child: Card(
         elevation: 5,
         child: Padding(
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(15),
           child: Column(
             children: [
               TextField(
@@ -48,12 +48,13 @@ class _TransactionFormState extends State<TransactionForm> {
               Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                 // ignore: deprecated_member_use
                 FlatButton(
+                  padding: EdgeInsets.all(10),
                   onPressed: _submitForm,
-                  textColor: Colors.purple,
-                  color: Colors.purple[100],
+                  textColor: Colors.white,
+                  color: Theme.of(context).primaryColor,
                   child: Text('Nova transação'),
-                )
-              ])
+                ),
+              ]),
             ],
           ),
         ),

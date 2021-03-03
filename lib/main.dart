@@ -17,6 +17,24 @@ class PesonMoney extends StatelessWidget {
       home: _MyHomePage(),
       theme: ThemeData(
         primarySwatch: Colors.purple,
+        accentColor: Colors.amber[200],
+        fontFamily: 'Quicksand',
+        textTheme: ThemeData.light().textTheme.copyWith(
+          title: TextStyle(
+              fontFamily: 'OpenSans',
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
+        ),
+        appBarTheme: AppBarTheme(
+          textTheme: ThemeData.light().textTheme.copyWith(
+            title: TextStyle(
+              fontFamily: 'OpenSans',
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        )
       ),  
     );
   }
@@ -29,18 +47,18 @@ class _MyHomePage extends StatefulWidget {
 
 class __MyHomePageState extends State<_MyHomePage> {
   final List<Transaction> _transaction = [
-    Transaction(
-      id: 't1',
-      title: 'Curso novo',
-      value: 21.50,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'Cueca nova',
-      value: 50.00,
-      date: DateTime.now(),
-    ),
+    // Transaction(
+    //   id: 't1',
+    //   title: 'Curso novo',
+    //   value: 21.50,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: 't2',
+    //   title: 'Cueca nova',
+    //   value: 50.00,
+    //   date: DateTime.now(),
+    // ),
   ];
 
   _addTransaction(String title, double value) {
