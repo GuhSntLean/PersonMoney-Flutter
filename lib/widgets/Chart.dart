@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:person_money/model/Transaction.dart';
 import 'package:intl/intl.dart';
+import 'package:person_money/widgets/ChartBar.dart';
 
 class Chart extends StatelessWidget {
   final List<Transaction> recentTransaction;
@@ -29,15 +30,32 @@ class Chart extends StatelessWidget {
     });
   }
 
+  double get _weekTotalValue {
+    return groupedTransaction.fold(0.0, (sum, transaction) {
+      return sum + transaction['value'];
+    });
+  }
+
   @override 
   Widget build(BuildContext context){
     return Card(
       elevation: 6,
       margin: EdgeInsets.all(20),
-      child: Row(
-        children: groupedTransaction.map((transaction) {
-          return Text('${transaction['day']}: ${transaction['value']}');
-        }).toList(),
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: groupedTransaction.map((transaction) {
+            return Flexible(
+              fit: FlexFit.tight,
+              child:ChartBar(
+                label: transaction['day'],
+                value: transaction['value'],
+                percentage: 0 >= transaction['value'] ? 00 : (transaction['value'] as double) / _weekTotalValue,
+              )
+            );
+          }).toList(),
+        ),
       ),
     );
   }
