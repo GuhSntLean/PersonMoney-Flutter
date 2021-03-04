@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class TransactionForm extends StatefulWidget {
   final void Function(String, double) onSubmit;
@@ -10,6 +11,7 @@ class TransactionForm extends StatefulWidget {
 class _TransactionFormState extends State<TransactionForm> {
   final titleController = TextEditingController();
   final valueController = TextEditingController();
+  DateTime _selectedDate;
 
   _submitForm() {
     final title = titleController.text;
@@ -19,6 +21,24 @@ class _TransactionFormState extends State<TransactionForm> {
       return;
     }
     widget.onSubmit(title, value);
+  }
+
+  _showDatePicker(){
+    showDatePicker(
+      context: context, 
+      initialDate: DateTime.now(), 
+      firstDate: DateTime(2021), 
+      lastDate: DateTime.now()
+    ).then((picketDate) {
+      if(picketDate == null){
+        return;
+      }      
+      setState(() {
+        _selectedDate = picketDate;
+      });
+    }).catchError((onError) {
+      print('Error: ${onError.toString()}');
+    });
   }
 
   @override
@@ -45,9 +65,35 @@ class _TransactionFormState extends State<TransactionForm> {
                   labelText: 'Valor (R\$)',
                 ),
               ),
-              Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+              Container(
+                height: 70,
+                margin: EdgeInsets.all(0),
+                child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      _selectedDate == null ? 'Sem data selecionada!' 
+                      : DateFormat('dd/MM/y').format(_selectedDate)
+                    ),
+                    // ignore: deprecated_member_use
+                    FlatButton(
+                      textColor: Theme.of(context).primaryColor,
+                      onPressed: _showDatePicker, 
+                      child: Text(
+                        'Selecione uma data',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold
+                        ),
+                      )
+                    )
+                  ],
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start, 
+                children: [
                 // ignore: deprecated_member_use
-                FlatButton(
+                RaisedButton(
                   padding: EdgeInsets.all(10),
                   onPressed: _submitForm,
                   textColor: Colors.white,
