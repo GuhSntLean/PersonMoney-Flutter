@@ -26,7 +26,7 @@ class PesonMoney extends StatelessWidget {
               fontFamily: 'OpenSans',
               fontSize: 15,
               fontWeight: FontWeight.bold,
-            ),
+          ),
         ),
         appBarTheme: AppBarTheme(
           textTheme: ThemeData.light().textTheme.copyWith(
@@ -49,6 +49,7 @@ class _MyHomePage extends StatefulWidget {
 
 class __MyHomePageState extends State<_MyHomePage> {
   final List<Transaction> _transaction = [];
+  bool _showChart = false;
   
   List<Transaction> get _recentTransaction{
     return _transaction.where((transaction) {
@@ -94,7 +95,9 @@ class __MyHomePageState extends State<_MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final appBar = AppBar(
-      title: Text('Despesas pessoais'),
+      title: Text(
+        'Despesas pessoais', 
+      ),
       actions: [
         IconButton(
           icon: Icon(Icons.add),
@@ -111,14 +114,30 @@ class __MyHomePageState extends State<_MyHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-              height: availableHeight * 0.3,
-              child: Chart(_recentTransaction),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text('Exibir Gráfico'),
+                Switch(
+                  value: _showChart, 
+                  onChanged: (value) {
+                    setState(() {
+                      _showChart = value;
+                    });                    
+                  },
+                )
+              ] 
             ),
-            Container(
-              height: availableHeight * 0.7,
-              child: TransactionList(_transaction, _deleteTransaction)
-            ),
+            if(_showChart) 
+              Container(
+                height: availableHeight * 0.3,
+                child: Chart(_recentTransaction),
+              ),
+            if(!_showChart)
+              Container(
+                height: availableHeight * 0.7,
+                child: TransactionList(_transaction, _deleteTransaction)
+              ),
           ],
         ),
       ),
