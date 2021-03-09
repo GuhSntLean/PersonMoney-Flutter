@@ -1,12 +1,12 @@
+import 'dart:io';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import './model/Transaction.dart';
 
 import './widgets/TransactionForm.dart';
 import './widgets/TransactionList.dart';
-
-import 'dart:math';
-
 import 'widgets/Chart.dart';
 
 void main() => runApp(PesonMoney());
@@ -139,7 +139,8 @@ class __MyHomePageState extends State<_MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: Platform.isIOS ? Container()
+      :FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () => _openTransactionFormModal(context),
       ),
